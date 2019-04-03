@@ -1,6 +1,9 @@
+using Data;
+using Data.Providers;
 using System;
-
+using System.Configuration;
 using Unity;
+using Unity.Injection;
 using WebAPI.Services;
 
 namespace WebAPI
@@ -44,7 +47,10 @@ namespace WebAPI
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
 
-            container.RegisterType<IPersonalProject1Service, PersonalProject1Service>();
+            container.RegisterType<IMyProjectService, MyProjectService>();
+
+            container.RegisterType<IDataProvider, SqlDataProvider>(
+            new InjectionConstructor(ConfigurationManager.ConnectionStrings["Default"].ConnectionString));
         }
     }
 }
